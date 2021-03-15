@@ -14,6 +14,7 @@ const getMovieDetailedHtml = movie => {
             <img src="http://image.tmdb.org/t/p/w300${movie.poster_path}" alt="picture of the movie">
             <br/>
             <span>Popularity: ${movie.popularity}</span>
+            <span>Premiere: ${movie.Premiere}</span>
             <p>Description: ${movie.overview}</p>
         </div>
     `
@@ -57,3 +58,14 @@ const getPopularMovies = () => {
     })
     .catch(error0=> console.error(error))
 }
+
+const getTopRated = () => {
+    fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=79a61f5dc13e3e9e4834fadbf4f326c7&language=en-US')
+    .then(res=>res.json()) //Here parseamos el dato
+    .then(res=> {
+        const movies = res.results;
+        renderMovies(movies);
+    })
+    .catch(error0=> console.error(error))
+}
+
